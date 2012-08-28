@@ -1,0 +1,63 @@
+<project name="Socks Proxy" basedir="." default="dist">
+
+	<property name="build.dir" value="target"/>
+	<property name="build.classes.dir" value="${build.dir}/classes"/>
+	<property name="build.packaging.dir" value="${build.dir}/packaging"/>
+	<property name="src.compile" value="src/main/java"/>
+	<property name="src.resources" value="src/main/resources"/>
+	<property name="src.packaging" value="src/packaging"/>
+	<property name="src.compile.deps" value="lib"/>
+	<property name="jar.filename" value="socksProxy.jar"/>
+
+	<path id="build.classpath">
+		<fileset dir="${src.compile.deps}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<tstamp>
+		<format property="buildDate" pattern="yyyy-MM-dd HH:mm:ss" />
+	</tstamp>
+
+	<target name="clean" description="cleans the project">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="prepare">
+		<mkdir dir="${build.dir}" />
+	</target>
+	
+	
+	<target name="compile" depends="prepare">
+		<mkdir dir="${build.classes.dir}"/>
+		<javac classpathref="build.classpath" destdir="${build.classes.dir}" 
+			srcdir="${src.compile}" target="1.6"
+			debug="yes"  />
+		<copy todir="${build.classes.dir}">
+		    <fileset dir="${src.resources}"/>
+		  </copy>
+	</target>
+	
+	<target name="jar" depends="compile">
+		<jar destfile="${build.dir}/${jar.filename}" basedir="${build.classes.dir}" update="true" >
+    		<manifest>
+    			<attribute name="Built-Date" value="${buildDate}"/>
+   		        <attribute name="Implementation-Title" value="${ant.project.name}"/>
+    		    <attribute name="Implementation-Version" value="1.7"/> 
+   			</manifest>
+		</jar>
+	</target>
+	
+		
+	<target name="dist" depends="jar">
+		<mkdir dir="${build.packaging.dir}"/>
+		<copy todir="${build.packaging.dir}">
+			<fileset dir="${src.packaging}"/>
+			<fileset dir="${src.compile.deps}"/>
+			<fileset file="${build.dir}/${jar.filename}"/>
+		</copy>
+	</target>
+	
+	
+
+</project>
