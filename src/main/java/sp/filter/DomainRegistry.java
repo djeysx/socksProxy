@@ -1,4 +1,4 @@
-package sp;
+package sp.filter;
 
 public interface DomainRegistry {
 

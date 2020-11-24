@@ -41,7 +41,7 @@ public class Socks5ProxyConnection extends AbstractSocksProxyConnection {
 				checkResolveDomain(requestConnection);
 				// updateStats(requestConnection.destinationDomain);
 
-				if (checkRejectedDomain(requestConnection.destinationDomain)) {
+				if (isRejectedDomain(requestConnection.destinationDomain)) {
 					log.info("Request rejected: " + requestConnection.toString());
 					// + " | " +
 					// stats.get(requestConnection.destinationDomain));

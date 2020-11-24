@@ -1,4 +1,4 @@
-package sp;
+package sp.filter;
 
 import java.io.BufferedReader;
 import java.io.File;

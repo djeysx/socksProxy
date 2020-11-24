@@ -1,4 +1,4 @@
-package sp;
+package sp.filter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+@Deprecated
 public class DomainRegistryOptimized implements DomainRegistry {
 	private static final Logger log = Logger.getLogger(DomainRegistryOptimized.class);
 
@@ -60,9 +61,9 @@ public class DomainRegistryOptimized implements DomainRegistry {
 			if (currentPos.size() > 0) {
 				currentPos = currentPos.get(d);
 				if (currentPos == null) {
-					// cas de pas trouvé
+					// cas de pas trouvï¿½
 					// System.out.println("End currentPos=" + currentPos + " d="
-					// + d + " pas trouvé : false");
+					// + d + " pas trouvï¿½ : false");
 					return false;
 				}
 			} else {
